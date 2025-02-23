@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Puzzle</title>
+    <link href="puzzle.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+</head>
+<body>
+    <div id="menu">
+        <a href="puzzle1.html">Puzzle 1</a>
+        <h1>Statue of Liberty Draggable Puzzle</h1>
+    </div>
+    <div class="puzzle-body" id="puzzle">
+        <div class="puzzle-piece" id="piece1" style="top: -100px; left: 0px; background-position: 0px 0px;"></div>
+        <div class="puzzle-piece" id="piece2" style="top: 0px; left: 266px; background-position: -266px 0px;"></div>
+        <div class="puzzle-piece" id="piece3" style="top: 0px; left: 532px; background-position: -532px 0px;"></div>
+        <div class="puzzle-piece" id="piece4" style="top: 300px; left: 0px; background-position: 0px -300px;"></div>
+        <div class="puzzle-piece" id="piece5" style="top: 300px; left: 266px; background-position: -266px -300px;"></div>
+        <div class="puzzle-piece" id="piece6" style="top: 300px; left: 532px; background-position: -532px -300px;"></div>
+    </div>
+    <div id="winning-message">You Win!</div>
+
+    <script>
+        $(document).ready(function() {
+
+            let piecePositions = {
+                piece1: { top: 0, left: 0 },
+                piece2: { top: 0, left: 266 },
+                piece3: { top: 0, left: 532 },
+                piece4: { top: 300, left: 0 },
+                piece5: { top: 300, left: 266 },
+                piece6: { top: 300, left: 532 }
+            };
+
+            let correctPieces = {
+                piece1: false,
+                piece2: false,
+                piece3: false,
+                piece4: false,
+                piece5: false,
+                piece6: false
+            };
+
+            $('.puzzle-piece').draggable({
+                containment: '.puzzle-body',
+                snap: '.puzzle-body',
+                snapMode: 'inner',    
+                stop: function(event, ui) {
+
+                    let id = ui.helper.attr('id');
+                    let piece = piecePositions[id];
+                    let tolerance = 50;
+
+                    if (Math.abs(ui.position.top - piece.top) < tolerance && Math.abs(ui.position.left - piece.left) < tolerance) {
+                        ui.helper.animate({ top: piece.top, left: piece.left }, 300);
+                        correctPieces[id] = true;
+                    } else {
+                        correctPieces[id] = false;
+                    }
+                    checkCompletion();
+                }
+            });
+
+
+            $('.puzzle-piece').each(function() {
+                let randomX = Math.floor(Math.random() * (1000)) -200; 
+                let randomY = Math.floor(Math.random() * (600)) - 100; 
+                $(this).css({ top: randomY + 'px', left: randomX + 'px' });
+            });
+
+
+            function checkCompletion() {
+                if (Object.values(correctPieces).every(val => val)) {
+                    $('#winning-message').fadeIn(); 
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

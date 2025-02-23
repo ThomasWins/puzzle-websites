@@ -1,0 +1,41 @@
+.puzzle-body {
+    position: relative;
+    width: 798px;
+    height: 600px;
+    margin:auto;
+    border: 2px solid #000;
+}
+.puzzle-piece {
+    position: absolute;
+    width: 266px;
+    height: 300px;
+    background-size: 800px 600px;
+    cursor: pointer;
+    background-image: url('liberty-new-york.jpeg');
+}
+#winning-message {
+    display: none;
+    text-align: center;
+    font-size: 30px;
+    color: green;
+    margin-top: 15px;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 20px;
+}
+.controls button {
+    margin: 5px;
+    background-color: rgb(200,200,200);
+    border-width: 1.2px;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 110px;
+    font-size: 1.5em;
+    transition: all ease-in-out .2s;
+}
+.controls button:hover {
+    background-color:rgb(180,180,180);
+}

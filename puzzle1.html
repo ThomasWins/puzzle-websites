@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Puzzle</title>
+    <link href="puzzle.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <a href="puzzle2.html">Puzzle 2</a>
+        <h1>1 Tile Movable Puzzle</h1>
+    </div>
+    <div class="puzzle-body" id="puzzle">
+        <div class="puzzle-piece" id="piece1" style="background-position: 0px 0px; top: 0px; left: 0px; "></div>
+        <div class="puzzle-piece" id="piece2" style="background-position: -266px 0px; top: 0px; left: 266px;"></div>
+        <div class="puzzle-piece" id="piece3" style="background-position: -532px 0px; top: 0px; left: 532px;"></div>
+        <div class="puzzle-piece" id="piece4" style="background-position: 0px -300px; top: 300px; left: 0px;"></div>
+        <div class="puzzle-piece" id="piece5" style="background-position: -266px -300px; top: 300px; left: 266px;"></div>
+        <div class="puzzle-piece" id="movable-piece" style="background-position: -532px -300px;"></div>
+    </div>
+    <div id="winning-message">You Win!</div>
+
+    <div class="controls">
+        <button id="up">Up</button>
+        <button id="down">Down</button>
+        <button id="left">Left</button>
+        <button id="right">Right</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            
+            let pieceWidth = 266;
+            let pieceHeight = 300;
+            let correctPosition = { left: 532, top: 300 };
+
+            function checkForCongrats() {
+                let currentPos = $('#movable-piece').position();
+                if (currentPos.left === correctPosition.left && currentPos.top === correctPosition.top) {
+                    $('#winning-message').fadeIn();
+                }
+            }
+
+            $('#up').click(function() {
+                let currentTop = $('#movable-piece').position().top;
+                if (currentTop > 0) {
+                    $('#movable-piece').animate({ top: `-=${pieceHeight}px` }, checkForCongrats);
+                }
+            });
+            $('#down').click(function() {
+                let currentTop = $('#movable-piece').position().top;
+                if (currentTop < 300) { 
+                    $('#movable-piece').animate({ top: `+=${pieceHeight}px` }, checkForCongrats);
+                }
+            });
+            $('#left').click(function() {
+                let currentLeft = $('#movable-piece').position().left;
+                if (currentLeft > 0) {
+                    $('#movable-piece').animate({ left: `-=${pieceWidth}px` }, checkForCongrats);
+                }
+            });
+            $('#right').click(function() {
+                let currentLeft = $('#movable-piece').position().left;
+                if (currentLeft < 532) {
+                    $('#movable-piece').animate({ left: `+=${pieceWidth}px` }, checkForCongrats);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
