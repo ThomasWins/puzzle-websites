@@ -1,5 +1,5 @@
 # Puzzle Websites with jQuery, HTML, and CSS
-This project demonstrates the use of **jQuery, HTML,** and **CSS** to create two interactive puzzle websites. Each puzzle incorporates dynamic user interaction with jQuery to enhance the user experience.
+Practice project using **jQuery, HTML,** and **CSS** to create two interactive puzzle websites. Each puzzle incorporates dynamic user interaction with jQuery to enhance the user experience.
 
 ## Features:
 - **Puzzle 1:** A classic sliding puzzle, where users rearrange pieces to solve the puzzle.
